@@ -1,11 +1,11 @@
 <!-- form-billing.html -->
 
-<a class="btn btn-info" data-toggle="modal" data-target="#billingModal">
+<a class="btn btn-success" data-toggle="modal" data-target="#billingModal">
     <span class="glyphicon glyphicon glyphicon-plus"></span>
     Add Bill
 </a>
 
-<div class="row" style="margin-top: 40px">
+<div class="row" style="margin-top: 20px">
     <div class="col-sm-6 col-md-4" ng-repeat="billing in formData.billings">
         <div class="thumbnail">
             <h4 style="text-align: center;font-weight: bold">Bill Info</h4>
@@ -13,12 +13,29 @@
                 <p>S$ <span style="font-weight: bold">{{billing.amount}}</span></p>
                 <p>By <span style="font-weight: bold">{{billing.payer}}</span></p>
                 <p>On <span style="font-weight: bold">{{billing.date}}</span></p>
-                <p style="text-align: center">
-                    <a class="btn btn-danger" role="button" ng-click="remove(billings, $index)">Delete This Bill</a>
-                </p>
-                <p style="text-align: center">
-                    <a class="btn btn-primary" role="button" data-toggle="modal"
-                       data-target="#sharingModal">Comm-sharing</a>
+                <div style="margin-top: 15px" ng-show="editEnabled">
+                    <label for="amount">Amount</label>
+                    <input type="text" class="form-control" name="amount" ng-model="editing.amount">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" name="date" ng-model="editing.date">
+                    <label for="payer">Payer</label>
+                    <input type="text" class="form-control" name="payer" ng-model="editing.payer">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" name="contact" ng-model="editing.contact">
+                    <label for="address">Address</label>
+                    <textarea type="text" class="form-control" name="address" ng-model="editing.address"
+                              style="resize: vertical;">
+                    </textarea>
+                </div>
+                <p style="text-align: center;margin-top: 10px;margin-bottom: 0;padding: 0;">
+                    <a class="btn btn-primary" role="button" ng-click="editEnabled=true;editPreview(billings, $index)"
+                       ng-show="!editEnabled">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
+                    <a class="btn btn-primary" role="button" ng-click="editEnabled=false;editObject(billings, $index)"
+                       ng-show="editEnabled">&nbsp;&nbsp;Save&nbsp;&nbsp;</a>
+                    <a class="btn btn-default" role="button" ng-click="editEnabled = false"
+                       ng-show="editEnabled">Cancel</a>
+                    <a class="btn btn-danger" role="button" ng-click="editEnabled=false;remove(billings, $index)"
+                       ng-show="!editEnabled">Delete</a>
                 </p>
             </div>
         </div>

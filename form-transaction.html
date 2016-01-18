@@ -3,43 +3,9 @@
 <div ui-view></div>
 
 <div class="form-group">
-    <label for="firmName">Solicitor Information</label>
-    <input type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#solicitorModal" value="Click To View & Edit"/>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="solicitorModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center">
-            <div class="modal-header">
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-                <h4 class="modal-title" id="solicitorModalLabel" style="font-weight: bold">Solicitor Information</h4>
-                <br>
-                <span style="font-size: smaller;color: #999999;">Current solicitor(if have) information will be displayed in the blanks, you can directly edit from the input fields.</span>
-                <span style="font-size: smaller;color: #999999;">Only one solicitor is allowed for each transaction.</span>
-            </div>
 
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="firmName">Firm Name</label>
-                    <input type="text" class="form-control" name="firmName" ng-model="formData.solicitor.firmName" value="{{formData.solicitor.firmName}}">
-                    <label for="solicitorName">Solicitor Name</label>
-                    <input type="text" class="form-control" name="solicitorName" ng-model="formData.solicitor.solicitorName" value="{{formData.solicitor.solicitorName}}">
-                    <label for="contact">Contact</label>
-                    <input type="text" class="form-control" name="contact" ng-model="formData.solicitor.contact" value="{{formData.solicitor.contact}}">
-                    <label for="address">Address</label>
-                    <textarea type="text" class="form-control" name="address" ng-model="formData.solicitor.address" value="{{formData.solicitor.address}}" style="resize: vertical;">
-                    </textarea>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" ng-click="deleteSolicitor()">Delete Solicitor</button>
-                <button type="button" class="btn btn-primary" ng-click="saveSolicitor()" data-dismiss="modal">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <hr>
 <div class="form-group row">

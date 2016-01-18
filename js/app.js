@@ -9,7 +9,7 @@ tsacApp.config(function($stateProvider, $urlRouterProvider) {
     
     $stateProvider
     
-    // route to show our basic form (/form)  this isnecessary for stateProvider to route to other form-xxxx.html
+    // route to show our basic form (/form)  this is necessary for stateProvider to route to other form-xxxx.html
     .state('form', {
         url: '/form',
         templateUrl: 'form.html',
@@ -32,8 +32,8 @@ tsacApp.config(function($stateProvider, $urlRouterProvider) {
     })
         
     // url will be /form/transaction/resale or ~/rental
-    //4 level nested state
-    .state('form.transaction', {            //this isnecessary for stateProvider to route to .transaction.resale/tental
+    // 4 level nested state
+    .state('form.transaction', {            //this is necessary for stateProvider to route to .transaction.resale/tental
         url: '/transaction',
         templateUrl: 'form-transaction.html'
     })
@@ -63,7 +63,7 @@ tsacApp.config(function($stateProvider, $urlRouterProvider) {
         url: '/billing',
         templateUrl: 'form-billing.html'
     })
-       
+
     // catch all route
     // send users to the form page 
     $urlRouterProvider.otherwise('/form/abstract');
@@ -92,9 +92,11 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function(
     $scope.pause = function () {
         Flash.pause();
     };    
-        
-    // declare all of our form data in this object
+
+    //declare form data
     $scope.formData = {};
+
+    //declare respective form data
     $scope.customers = [];
     $scope.cobrokers = [];
     $scope.billings = [];
@@ -102,33 +104,43 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function(
     $scope.cobrokerInput = {};
     $scope.billingInput = {};
 
-    
-        
-    // function to process the submit
+    //for edit
+    $scope.editEnabled = false;
+    $scope.editing = {};
+
+
+    //submit form for ng-submit
     $scope.processForm = function() {
         alert('submitted!');
     };
-        
-    // function addnew customer
+
+    //add customer
     $scope.addCustomer = function() {
         var cust = $scope.custInput;
         $scope.customers.push(cust);
         $scope.custInput = {};
         $scope.formData.customers = $scope.customers;
-        
-        var message = '<strong>Done!</strong> You successfully saved the customer.';
-        Flash.create('success', message);
-        
     };
+
+    //json array
+    //generic edit of an object in an array
+    $scope.editObject = function(array, index){
+        var customer = $scope.editing;
+        array[index] = customer;
+        $scope.editing = {};
+    };
+
+    //generic generate preview data when edit of an object in an array
+    $scope.editPreview = function(array, index){
+        $scope.editing = array[index];
+    }
 
     //generic removal of an object in an array
     $scope.remove = function(array, index){
         array.splice(index, 1);
-        var message = '<strong>Done!</strong> It is successfully removed from the list.';
-        Flash.create('success', message);
     };
     
-    //customer address
+    //retrieve first customer address
     $scope.sameAddress = function() {
         if($scope.customers.length > 0){
             var address =  $scope.customers[0].address;
@@ -137,11 +149,19 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function(
             alert("No customer saved!");
         }
     };
-    
+
+    //add solicitor
+    $scope.saveSolicitor = function() {
+        var message = '<strong>Done!</strong> You successfully saved solicitor.';
+        Flash.create('success', message);
+    };
+
+    //delete solicitor
     $scope.deleteSolicitor = function() {
         delete $scope.formData.solicitor;
     };
-    
+
+    //add co-broker
     $scope.addCobroker = function() {
         var cob = $scope.cobrokerInput;
         $scope.cobrokers.push(cob);
@@ -151,15 +171,15 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function(
         Flash.create('success', message);
     };
 
+    //add bill
     $scope.addBilling = function() {
         var billing = $scope.billingInput;
         $scope.billings.push(billing);
         $scope.billingInput = {};
         $scope.formData.billings = $scope.billings;
-        var message = '<strong>Done!</strong> You successfully saved billing information.';
-        Flash.create('success', message);
     };
 
+    //commission sharing
     $scope.saveCommShare = function() {
     };
     
