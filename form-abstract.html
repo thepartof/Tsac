@@ -1,0 +1,48 @@
+<!-- form-abstract.html -->
+<div class="form-group">
+    <label for="agentNric">Agent NRIC</label>
+    <input type="text" class="form-control" name="agentNric" ng-model="formData.abstract.agentNric">
+</div>
+
+<div class="form-group">
+    <label for="tsacDate">Transaction Date</label>
+    <input type="date" class="form-control" name="tsacDate" ng-model="formData.abstract.tsacDate">
+</div>
+
+<div class="form-group">
+    <label for="tsacType">Transaction Type</label>
+    <select class="form-control" name="tsacType" ng-model="formData.abstract.tsacType">
+        <option value="resale">RESALE</option>
+        <option value="rental">RENTAL</option>
+    </select>
+</div>
+
+
+<div class="form-group">
+    <label for="propType">Property Type</label>
+    <select class="form-control" name="propType" ng-model="formData.abstract.propType">
+        <option>HDB</option>
+        <option>CONDO</option>
+        <option>COMMERCIAL</option>
+        <option>INDUSTRIAL</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="clientType">Client Type</label>
+    <select class="form-control" name="clientType" ng-model="formData.abstract.clientType">
+        <option>SELLER</option>
+        <option>BUYER</option>
+        <option>LANDLORD</option>
+        <option>TENANT</option>
+    </select>
+</div>
+
+<hr>
+<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="form.profile" class="btn btn-block btn-info">
+            Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<!-- form-billing.html -->
+
+<a class="btn btn-info" data-toggle="modal" data-target="#billingModal">
+    <span class="glyphicon glyphicon glyphicon-plus"></span>
+    Add Bill
+</a>
+
+<div class="row" style="margin-top: 40px">
+    <div class="col-sm-6 col-md-4" ng-repeat="billing in formData.billings">
+        <div class="thumbnail">
+            <h4 style="text-align: center;font-weight: bold">Bill Info</h4>
+            <div class="caption">
+                <p>S$ <span style="font-weight: bold">{{billing.amount}}</span></p>
+                <p>By <span style="font-weight: bold">{{billing.payer}}</span></p>
+                <p>On <span style="font-weight: bold">{{billing.date}}</span></p>
+                <p style="text-align: center">
+                    <a class="btn btn-danger" role="button" ng-click="remove(billings, $index)">Delete This Bill</a>
+                </p>
+                <p style="text-align: center">
+                    <a class="btn btn-primary" role="button" data-toggle="modal"
+                       data-target="#sharingModal">Comm-sharing</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bill Modal -->
+<div class="modal fade" id="billingModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="billingModalLabel" style="text-align: center;font-weight: bold">Billing
+                    Information</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="text" class="form-control" name="amount" ng-model="billingInput.amount">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" name="date" ng-model="billingInput.date">
+                    <label for="payer">Payer</label>
+                    <input type="text" class="form-control" name="payer" ng-model="billingInput.payer">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" name="contact" ng-model="billingInput.contact">
+                    <label for="address">Address</label>
+                    <textarea type="text" class="form-control" name="address" ng-model="billingInput.address"
+                              style="resize: vertical;">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addBilling()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sharing Modal -->
+<div class="modal fade" id="sharingModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="sharingModalLabel" style="text-align: center;font-weight: bold">Commission
+                    Sharing</h4>
+            </div>
+
+            <div class="modal-body">
+                <label>Example:</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Agency-Cobroker Name</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon3" placeholder="Key in share amount here, leave blank if not applicable." disabled>
+                </div>
+                <div ng-repeat="cobroker in formData.cobrokers">
+                    <div class="input-group" style="margin-top: 20px">
+                        <span class="input-group-addon">{{cobroker.agency}}-{{cobroker.name}}</span>
+                        <input type="text" value="{{cobroker.agency}}-{{cobroker.name}}" style="display: none"/>
+                        <input type="text" class="form-control" aria-describedby="basic-addon3"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveCommShare()">Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

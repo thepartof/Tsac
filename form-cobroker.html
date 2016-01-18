@@ -1,0 +1,67 @@
+<!-- form-cobroker.html -->
+
+<div class="form-group">
+    <label for="agency">Co-broker Agency</label>
+    <select class="form-control" name="agency" ng-model="cobrokerInput.agency">
+        <option>DWG</option>
+        <option>ERA</option>
+        <option>PROPNEX</option>
+        <option>OrangeTee</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="name">Co-broker Name</label>
+    <input type="text" class="form-control" name="name" ng-model="cobrokerInput.name">
+</div>
+
+<div class="form-group">
+    <label for="contact">Co-broker Contact Number</label>
+    <input type="text" class="form-control" name="contact" ng-model="cobrokerInput.contact">
+</div>
+
+
+<div class="form-group row">
+    <div class="col-xs-3">
+        <a ng-click="addCobroker()" class="btn btn-block btn-success">
+            Save Agent
+        </a>
+    </div>
+    <div class="col-xs-9">
+        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#cobrokerModal"  style="float: right" value="View Co-brokers"/>
+    </div>
+</div>
+
+<hr>
+<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3 row">
+        <a ui-sref="form.billing" class="btn btn-block btn-info">
+           Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cobrokerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <h4 class="modal-title" id="cobrokerModalLabel" style="text-align: center;font-weight: bold">Customer Information</h4>
+            </div>
+            <div flash-message="1250"></div>
+            <div class="modal-body">
+                <li ng-repeat="cobroker in formData.cobrokers" style="list-style: none">
+                    <span style="display: inline-block; width: 100%">[{{$index + 1}}] {{cobroker.agency}}-{{cobroker.name}}     <a class="btn" ng-click="remove(cobrokers, $index)" style="float: right;height: 15px;padding: 0">&times;</a></span>
+                </li>
+                <li ng-if="!cobrokers.length > 0" style="list-style: none">
+                    No cobroker saved!
+                </li>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

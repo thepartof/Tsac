@@ -1,0 +1,145 @@
+/* style.css */
+/* BASIC STYLINGS
+============================================================================= */
+body{ 
+    padding-top: 20px;
+}
+
+/* form styling */
+#form-container{
+    background: #2f2f2f;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+#form-container .page-header{
+    background: #151515;
+    margin: 0;
+    padding: 30px; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* numbered buttons */
+#status-buttons{
+
+}
+#status-buttons a{
+    color: #FFF;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#status-buttons a:hover{
+    text-decoration: none;
+}
+
+/* we will style the span as the circled number */
+#status-buttons span{
+    background: #080808;
+    display: block;
+    height: 30px;
+    margin: 0 auto 10px;
+    padding-top: 5px;
+    width: 30px; 
+    border-radius: 50%;
+}
+
+/* active buttons turn light green-blue*/
+#status-buttons a.active span{
+    background: #00BC8C;
+}
+
+/*
+     ----------------------------------------------
+                         CHECKBOX
+     ----------------------------------------------
+*/
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left:0; top: 0px;
+    width: 20px; height: 20px;
+    background: #09ad7e;
+    border-radius: 3px;
+}
+[type="checkbox"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left:0; top: 0px;
+    width: 20px; height: 20px;
+    background: #eee;
+    border-radius: 3px;
+}
+/* checked mark aspect */
+
+[type="checkbox"]:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: 0; left: 4px;
+    font-size: 14px;
+    color: #f8f8f8;
+    transition: all .2s;
+}
+[type="checkbox"]:not(:checked) + label:after {
+    content: '✔';
+    position: absolute;
+    top: 0; left: 4px;
+    font-size: 14px;
+    color: #ddd;
+    transition: all .2s;
+
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    outline: none !important;
+}
+
+/* hover style just for information */
+label:hover:before {
+    //border: 1px solid #4778d9!important;
+}
+
+[type="checkbox"]:not(:checked) + label {
+    color: #ddd;
+}
