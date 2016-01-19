@@ -77,7 +77,7 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function 
     //declare new object entry input holder
     $scope.newEntry = {};
     //for edit mode
-    $scope.editEnabled = false;
+    //$scope.editEnabled = false;
     //edit input holder
     $scope.editing = {};
 
@@ -104,10 +104,12 @@ tsacApp.controller('formController', ['$rootScope', '$scope', 'Flash', function 
     };
 
     //generic edit of an object in an array
+    /*
     $scope.editObject = function (array, index) {
         array[index] = $scope.editing;
         $scope.editing = {};
     };
+    */
 
     //generic generate preview data when edit of an object in an array
     $scope.editPreview = function (array, index) {
