@@ -1,29 +1,30 @@
 <!-- form-billing.html -->
-
+<div flash-message="1250"></div>
 <a class="btn btn-success" data-toggle="modal" data-target="#billingModal">
     <span class="glyphicon glyphicon glyphicon-plus"></span>
     Add Bill
 </a>
 
+<!-- bill thumbnails -->
 <div class="row" style="margin-top: 20px">
     <div class="col-sm-6 col-md-4" ng-repeat="billing in formData.billings">
         <div class="thumbnail">
             <h4 style="text-align: center;font-weight: bold">Bill Info</h4>
             <div class="caption">
-                <p>S$ <span style="font-weight: bold">{{billing.amount}}</span></p>
-                <p>By <span style="font-weight: bold">{{billing.payer}}</span></p>
-                <p>On <span style="font-weight: bold">{{billing.date}}</span></p>
+                <p ng-show="!editEnabled">S$ <span style="font-weight: bold">{{billing.amount}}</span></p>
+                <p ng-show="!editEnabled">By <span style="font-weight: bold">{{billing.payer}}</span></p>
+                <p ng-show="!editEnabled">On <span style="font-weight: bold">{{billing.date}}</span></p>
                 <div style="margin-top: 15px" ng-show="editEnabled">
-                    <label for="amount">Amount</label>
-                    <input type="text" class="form-control" name="amount" ng-model="editing.amount">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" name="date" ng-model="editing.date">
-                    <label for="payer">Payer</label>
-                    <input type="text" class="form-control" name="payer" ng-model="editing.payer">
-                    <label for="contact">Contact</label>
-                    <input type="text" class="form-control" name="contact" ng-model="editing.contact">
-                    <label for="address">Address</label>
-                    <textarea type="text" class="form-control" name="address" ng-model="editing.address"
+                    <label>Amount</label>
+                    <input type="text" class="form-control" ng-model="editing.amount">
+                    <label>Date</label>
+                    <input type="date" class="form-control" ng-model="editing.date">
+                    <label>Payer</label>
+                    <input type="text" class="form-control" ng-model="editing.payer">
+                    <label>Contact</label>
+                    <input type="text" class="form-control" ng-model="editing.contact">
+                    <label>Address</label>
+                    <textarea type="text" class="form-control" ng-model="editing.address"
                               style="resize: vertical;">
                     </textarea>
                 </div>
@@ -43,6 +44,13 @@
 </div>
 
 
+<hr>
+<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3 row">
+        <input type="submit" class="btn btn-block btn-info">
+    </div>
+</div>
+
 <!-- Bill Modal -->
 <div class="modal fade" id="billingModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -54,30 +62,30 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input type="text" class="form-control" name="amount" ng-model="billingInput.amount">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" name="date" ng-model="billingInput.date">
-                    <label for="payer">Payer</label>
-                    <input type="text" class="form-control" name="payer" ng-model="billingInput.payer">
-                    <label for="contact">Contact</label>
-                    <input type="text" class="form-control" name="contact" ng-model="billingInput.contact">
-                    <label for="address">Address</label>
-                    <textarea type="text" class="form-control" name="address" ng-model="billingInput.address"
+                    <label>Amount</label>
+                    <input type="text" class="form-control" ng-model="newEntry.amount">
+                    <label>Date</label>
+                    <input type="date" class="form-control" ng-model="newEntry.date">
+                    <label>Payer</label>
+                    <input type="text" class="form-control" ng-model="newEntry.payer">
+                    <label>Contact</label>
+                    <input type="text" class="form-control" ng-model="newEntry.contact">
+                    <label>Address</label>
+                    <textarea type="text" class="form-control" ng-model="newEntry.address"
                               style="resize: vertical;">
                     </textarea>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addBilling()">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newObject(billings)">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Sharing Modal -->
+<!-- Sharing Modal
 <div class="modal fade" id="sharingModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -109,3 +117,4 @@
         </div>
     </div>
 </div>
+-->

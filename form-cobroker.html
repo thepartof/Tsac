@@ -1,36 +1,52 @@
 <!-- form-cobroker.html -->
+<div flash-message="1250"></div>
+<a class="btn btn-success" data-toggle="modal" data-target="#newCobrokerModal">
+    <span class="glyphicon glyphicon glyphicon-plus"></span>
+    Add Co-broker
+</a>
 
-<div class="form-group">
-    <label for="agency">Co-broker Agency</label>
-    <select class="form-control" name="agency" ng-model="cobrokerInput.agency">
-        <option>DWG</option>
-        <option>ERA</option>
-        <option>PROPNEX</option>
-        <option>OrangeTee</option>
-    </select>
-</div>
-
-<div class="form-group">
-    <label for="name">Co-broker Name</label>
-    <input type="text" class="form-control" name="name" ng-model="cobrokerInput.name">
-</div>
-
-<div class="form-group">
-    <label for="contact">Co-broker Contact Number</label>
-    <input type="text" class="form-control" name="contact" ng-model="cobrokerInput.contact">
-</div>
-
-
-<div class="form-group row">
-    <div class="col-xs-3">
-        <a ng-click="addCobroker()" class="btn btn-block btn-success">
-            Save Agent
-        </a>
+<div class="row" style="margin-top: 20px">
+    <!-- cobroker thumbnail -->
+    <div class="col-sm-6 col-md-4" ng-repeat="cobroker in formData.cobrokers">
+        <div class="thumbnail">
+            <h4 style="text-align: center;font-weight: bold">Co-broker Info</h4>
+            <div class="caption">
+                <p ng-show="!editEnabled"><span style="width: 10%;text-align: right">ID No : </span><span
+                        style="font-weight: bold">{{cobroker.agency | limitTo:18}}<span
+                        ng-show="{{cobroker.agency.length > 18}}">...</span></span></p>
+                <p ng-show="!editEnabled"><span style="width: 10%;text-align: right">Name : </span><span
+                        style="font-weight: bold">{{cobroker.name | limitTo:17}}<span
+                        ng-show="{{cobroker.name.length > 18}}">...</span></span></p>
+                <p ng-show="!editEnabled" style="display: inline-block;margin-bottom: 15px"><span
+                        style="width: 10%;text-align: right">Contact : </span><span
+                        style="font-weight: bold">{{cobroker.contact | limitTo:16}}<span
+                        ng-show="{{cobroker.contact.length > 18}}">...</span></span></p>
+                <div style="margin-top: 15px" ng-show="editEnabled">
+                    <label>NRIC/Passport No</label> *
+                    <input type="text" class="form-control" ng-model="editing.agency">
+                    <label>Customer Name</label> *
+                    <input type="text" class="form-control" ng-model="editing.name">
+                    <label>Contact Number</label> *
+                    <input type="text" class="form-control" ng-model="editing.contact">
+                </div>
+                <p style="text-align: center;margin-top: 10px;margin-bottom: 0;padding: 0;">
+                    <a class="btn btn-primary" role="button" ng-click="editEnabled=true;editPreview(cobrokers, $index)"
+                       ng-show="!editEnabled">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
+                    <a class="btn btn-primary" role="button" ng-click="editEnabled=false;editObject(cobrokers, $index)"
+                       ng-show="editEnabled">&nbsp;&nbsp;Save&nbsp;&nbsp;</a>
+                    <a class="btn btn-default" role="button" ng-click="editEnabled = false"
+                       ng-show="editEnabled">Cancel</a>
+                    <a class="btn btn-danger" role="button" ng-click="editEnabled=false;remove(cobrokers, $index)"
+                       ng-show="!editEnabled">Delete</a>
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-9">
-        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#cobrokerModal"  style="float: right" value="View Co-brokers"/>
-    </div>
 </div>
+
+
+
+
 
 <hr>
 <div class="form-group row">
@@ -42,24 +58,34 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="cobrokerModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="newCobrokerModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-                <h4 class="modal-title" id="cobrokerModalLabel" style="text-align: center;font-weight: bold">Customer Information</h4>
+                <h4 class="modal-title" id="newCobrokerModalLabel" style="text-align: center;font-weight: bold">Customer Information</h4>
             </div>
-            <div flash-message="1250"></div>
+
             <div class="modal-body">
-                <li ng-repeat="cobroker in formData.cobrokers" style="list-style: none">
-                    <span style="display: inline-block; width: 100%">[{{$index + 1}}] {{cobroker.agency}}-{{cobroker.name}}     <a class="btn" ng-click="remove(cobrokers, $index)" style="float: right;height: 15px;padding: 0">&times;</a></span>
-                </li>
-                <li ng-if="!cobrokers.length > 0" style="list-style: none">
-                    No cobroker saved!
-                </li>
+                <div class="form-group">
+                    <label>Co-broker Agency</label>
+                    <select class="form-control" ng-model="newEntry.agency">
+                        <option>DWG</option>
+                        <option>ERA</option>
+                        <option>PROPNEX</option>
+                        <option>OrangeTee</option>
+                    </select>
+                    <label>Co-broker Name</label>
+                    <input type="text" class="form-control" ng-model="newEntry.name">
+
+                    <label>Co-broker Contact Number</label>
+                    <input type="text" class="form-control" ng-model="newEntry.contact">
+                </div>
             </div>
 
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newObject(cobrokers)">Save
+                </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

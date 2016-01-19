@@ -1,5 +1,5 @@
 <!-- form-customer.html -->
-
+<div flash-message="1250"></div>
 <a class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
     <span class="glyphicon glyphicon glyphicon-plus"></span>
     Add Customer
@@ -12,54 +12,19 @@
 
 
 <div class="row" style="margin-top: 20px">
-    <!-- solicitor thumbnail
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <h4 style="text-align: center;font-weight: bold">Solicitor Info</h4>
-            <div class="caption">
-                <p><span style="width: 10%;text-align: right">Firm : </span><span style="font-weight: bold">{{formData.solicitor.firmName | limitTo:18}}<span
-                        ng-show="{{formData.solicitor.firmName.length > 18}}">...</span></span></p>
-                <p><span style="width: 10%;text-align: right">Name : </span><span style="font-weight: bold">{{formData.solicitor.solicitorName | limitTo:17}}<span
-                        ng-show="{{formData.solicitor.solicitorName.length > 18}}">...</span></span></p>
-                <p style="display: inline-block;margin-bottom: 15px"><span style="width: 10%;text-align: right">Contact : </span><span
-                        style="font-weight: bold">{{formData.solicitor.contact | limitTo:16}}<span
-                        ng-show="{{soliformData.solicitorcitor.contact.length > 18}}">...</span></span></p>
-                <div style="margin-top: 15px" ng-show="editEnabled">
-                    <label>Solicitor Firm</label> *
-                    <input type="text" class="form-control" ng-model="editing.firmName">
-                    <label>Solicitor Name</label> *
-                    <input type="text" class="form-control" ng-model="editing.solicitorName">
-                    <label>Contact Number</label> *
-                    <input type="text" class="form-control" ng-model="editing.contact">
-                    <label>Address</label> *
-                    <textarea type="text" class="form-control" ng-model="editing.address"
-                              style="resize: vertical;">
-                    </textarea>
-                </div>
-                <p style="text-align: center;margin-top: 10px;margin-bottom: 0;padding: 0;">
-                    <a class="btn btn-primary" role="button" ng-click="editEnabled=true;editPreview(customers, $index)"
-                       ng-show="!editEnabled">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
-                    <a class="btn btn-primary" role="button" ng-click="editEnabled=false;editObject(customers, $index)"
-                       ng-show="editEnabled">&nbsp;&nbsp;Save&nbsp;&nbsp;</a>
-                    <a class="btn btn-default" role="button" ng-click="editEnabled = false"
-                       ng-show="editEnabled">Cancel</a>
-                    <a class="btn btn-danger" role="button" ng-click="editEnabled=false;remove(customers, $index)"
-                       ng-show="!editEnabled">Delete</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    -->
     <!-- customer thumbnail -->
     <div class="col-sm-6 col-md-4" ng-repeat="customer in formData.customers">
         <div class="thumbnail">
             <h4 style="text-align: center;font-weight: bold">Customer Info</h4>
             <div class="caption">
-                <p><span style="width: 10%;text-align: right">ID No : </span><span style="font-weight: bold">{{customer.idNo | limitTo:18}}<span
+                <p ng-show="!editEnabled"><span style="width: 10%;text-align: right">ID No : </span><span
+                        style="font-weight: bold">{{customer.idNo | limitTo:18}}<span
                         ng-show="{{customer.idNo.length > 18}}">...</span></span></p>
-                <p><span style="width: 10%;text-align: right">Name : </span><span style="font-weight: bold">{{customer.name | limitTo:17}}<span
+                <p ng-show="!editEnabled"><span style="width: 10%;text-align: right">Name : </span><span
+                        style="font-weight: bold">{{customer.name | limitTo:17}}<span
                         ng-show="{{customer.name.length > 18}}">...</span></span></p>
-                <p style="display: inline-block;margin-bottom: 15px"><span style="width: 10%;text-align: right">Contact : </span><span
+                <p ng-show="!editEnabled" style="display: inline-block;margin-bottom: 15px"><span
+                        style="width: 10%;text-align: right">Contact : </span><span
                         style="font-weight: bold">{{customer.contact | limitTo:16}}<span
                         ng-show="{{customer.contact.length > 18}}">...</span></span></p>
                 <div style="margin-top: 15px" ng-show="editEnabled">
@@ -102,7 +67,7 @@
 </div>
 
 
-<!-- Customer Modal -->
+<!-- New Customer Modal -->
 <div class="modal fade" id="newCustomerModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -114,26 +79,27 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>NRIC/Passport No</label>
-                    <input type="text" class="form-control" ng-model="custInput.idNo">
+                    <input type="text" class="form-control" ng-model="newEntry.idNo">
                     <label>Customer Name</label>
-                    <input type="text" class="form-control" ng-model="custInput.name">
+                    <input type="text" class="form-control" ng-model="newEntry.name">
                     <label>Contact Number</label>
-                    <input type="text" class="form-control" ng-model="custInput.contact">
+                    <input type="text" class="form-control" ng-model="newEntry.contact">
                     <label>Nationality</label>
-                    <input type="text" class="form-control" ng-model="custInput.nationality">
+                    <input type="text" class="form-control" ng-model="newEntry.nationality">
                 </div>
                 <div class="form-group" style="margin-top: 10px">
                     <label>Address</label>
                     <span style="float: right">* Use first customer address
-                        <a ng-click="sameAddress()" class="btn btn-danger" style="height:22px;padding: 0;width: 130px">Use
+                        <a ng-click="newEntry.address = customers[0].address" class="btn btn-danger"
+                           style="height:22px;padding: 0;width: 130px">Use
                             Same Address</a>
                     </span>
-                    <textarea type="text" class="form-control" ng-model="custInput.address"
+                    <textarea type="text" class="form-control" ng-model="newEntry.address"
                               style="resize: vertical"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addCustomer()">Save
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newObject(customers)">Save
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -147,27 +113,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-                <h4 class="modal-title" id="solicitorModalLabel" style="text-align: center;font-weight: bold;">Solicitor Information</h4>
-                <p style="color: darkgray;text-align: center;padding: 0;margin-bottom: 0;padding-top: 10px">Solicitor info(if have) will be displayed in the blanks, please edit directly from there.</p>
+                <h4 class="modal-title" id="solicitorModalLabel" style="text-align: center;font-weight: bold;">Solicitor
+                    Information</h4>
+                <p style="color: darkgray;text-align: center;padding: 0;margin-bottom: 0;padding-top: 10px">Solicitor
+                    info(if have) will be displayed in the blanks, please edit directly from there.</p>
             </div>
 
             <div class="modal-body">
                 <div class="form-group">
                     <label>Firm Name</label>
-                    <input type="text" class="form-control" name="firmName" ng-model="formData.solicitor.firmName">
+                    <input type="text" class="form-control" ng-model="formData.solicitor.firmName">
                     <label>Solicitor Name</label>
-                    <input type="text" class="form-control" name="solicitorName" ng-model="formData.solicitor.solicitorName">
+                    <input type="text" class="form-control" ng-model="formData.solicitor.solicitorName">
                     <label>Contact</label>
-                    <input type="text" class="form-control" name="contact" ng-model="formData.solicitor.contact">
+                    <input type="text" class="form-control" ng-model="formData.solicitor.contact">
                     <label>Address</label>
-                    <textarea type="text" class="form-control" name="address" ng-model="formData.solicitor.address" style="resize: vertical;">
+                    <textarea type="text" class="form-control" ng-model="formData.solicitor.address"
+                              style="resize: vertical;">
                     </textarea>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" ng-click="deleteSolicitor()">Delete Solicitor</button>
-                <button type="button" class="btn btn-primary" ng-click="saveSolicitor()" data-dismiss="modal">Save
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                        ng-click="formData.solicitor = {};alertMessage(1)">Delete Solicitor
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="alertMessage(1)">Save
                     changes
                 </button>
             </div>
